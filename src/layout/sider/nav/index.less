@@ -1,0 +1,17 @@
+.layout-sider-nav {
+  padding: 0 16px;
+
+  // 选中时左侧样式
+  .now {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -10px;
+      width: 4px;
+      background-color: #61dafb;
+    }
+  }
+}

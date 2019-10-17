@@ -1,0 +1,28 @@
+.layout-sider-nav-first {
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
+  &.active &-header {
+    color:#1a1a1a;
+  }
+
+  &-header {
+    position: relative;
+    font-size: 14px;
+    color:#6d6d6d;
+    line-height: 2;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      color:#1a1a1a;
+    }
+
+    &-icon {
+      margin-left: 8px;
+    }
+  }
+}
