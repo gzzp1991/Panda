@@ -28,6 +28,7 @@ import RamdaRelation from 'page/ramda/relation';
 import RamdaString from 'page/ramda/string';
 
 import Js from 'page/js';
+import JsFp from 'page/js/fp';
 
 import Ts from 'page/ts';
 
@@ -100,6 +101,12 @@ export const routerInfo = {
   js: {
     name: 'javascipt',
     component: Js,
+    child: {
+      fp: {
+        name: '函数式编程',
+        component: JsFp,
+      },
+    },
   }
 };
 
@@ -126,6 +133,10 @@ export default () => {
           <Route path="react" component={TestReact} />
           <Route path="update" component={TestUpdate} />
           <Route path="hoc" component={TestHoc} />
+        </Route>
+
+        <Route path="js" component={Js}>
+          <Route path="fp" component={JsFp} />
         </Route>
       </Route>
 

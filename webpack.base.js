@@ -5,22 +5,24 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const Happypack = require('happypack');
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const marked = require("marked");
+const renderer = new marked.Renderer();
 
 module.exports = {
   // mode: 'development', // production | development
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   output: {
     filename: '[name].[hash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
   watch: true,
   watchOptions: {
     poll: 1000, // 每1000毫秒检查一次变动
     aggregateTimeout: 300, // 防抖时间 1000毫秒
-    ignored: /node_modules/ // 忽略文件夹
+    ignored: /node_modules/, // 忽略文件夹
   },
   // devtool: 'eval-source-map', // source-map | eval-source-map | cheap-module-source-map | cheap-module-eval-source-map
   devServer: {
@@ -51,12 +53,27 @@ module.exports = {
                 ['@babel/plugin-proposal-decorators', { legacy: true }],
                 '@babel/plugin-proposal-class-properties',
                 '@babel/plugin-transform-runtime',
-              ]
-            }
+              ],
+            },
           },
         ],
       },
-    ]
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+          {
+            loader: 'markdown-loader',
+            options: {
+              pedantic: true,
+              renderer,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -68,9 +85,9 @@ module.exports = {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true,
       },
-      hash: true
+      hash: true,
     }),
     new webpack.NamedModulesPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
@@ -89,12 +106,12 @@ module.exports = {
     // new webpack.IgnorePlugin(/\.\/local/, /moment/)
   ],
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       src: path.resolve(__dirname, 'src'),
       util: path.resolve(__dirname, 'src/util'),
       page: path.resolve(__dirname, 'src/page'),
-      component: path.resolve(__dirname, 'src/component')
-    }
-  }
+      component: path.resolve(__dirname, 'src/component'),
+    },
+  },
 };
