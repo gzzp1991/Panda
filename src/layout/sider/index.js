@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 
 import { routerInfo } from 'src/router';
+import SiderHead from './head';
 import SiderRadio from './radio';
 import SiderNav from './nav';
 import './index.less';
@@ -27,6 +28,7 @@ class LayoutSider extends PureComponent {
       <div className="layout-sider">
         <SiderRadio active={activeRadio} radios={this.radios} onChange={this.changRadio} />
         <SiderNav path={`/${activeRadio}`} nav={routerInfo[activeRadio].child} />
+        <SiderHead />
       </div>
     );
   }
