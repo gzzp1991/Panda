@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 // import * as R from 'ramda';
+import Fold from './fold';
 import './index.less';
 
 class LayoutContent extends PureComponent {
@@ -16,9 +17,14 @@ class LayoutContent extends PureComponent {
   // };
 
   render() {
-    const { children } = this.props;
+    const { children, isFold, updateFold } = this.props;
 
-    return <div className="layout-content">{children && children}</div>;
+    return (
+      <div className={classnames('layout-content', { 'layout-content-isfold': isFold })}>
+        {children && children}
+        <Fold isFold={isFold} updateFold={updateFold} />
+      </div>
+    );
   }
 }
 

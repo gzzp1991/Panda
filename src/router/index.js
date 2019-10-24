@@ -5,6 +5,7 @@ import Layout from 'src/layout';
 
 import Echarts from 'page/echarts';
 import EchartsPie from 'page/echarts/pie';
+import EchartsBar from 'page/echarts/bar';
 
 import Test from 'page/test';
 import TestReact from 'page/test/react';
@@ -41,7 +42,12 @@ export const routerInfo = {
         code: 'pie',
         name: '饼图',
         component: EchartsPie,
-      }
+      },
+      bar: {
+        code: 'bar',
+        name: '柱状图',
+        component: EchartsBar,
+      },
     },
   },
   test: {
@@ -126,6 +132,7 @@ export default () => {
       <Route path="/" component={Layout}>
         <Route path="echarts" component={Echarts}>
           <Route path="pie" component={EchartsPie} />
+          <Route path="bar" component={EchartsBar} />
         </Route>
 
         <Route path="test" component={Test}>

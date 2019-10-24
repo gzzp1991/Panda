@@ -22,10 +22,11 @@ class LayoutSider extends PureComponent {
   };
 
   render() {
+    const { isFold } = this.props;
     const { activeRadio } = this.state;
 
     return (
-      <div className="layout-sider">
+      <div className={classnames('layout-sider', { 'layout-sider-isfold': isFold })}>
         <SiderRadio active={activeRadio} radios={this.radios} onChange={this.changRadio} />
         <SiderNav path={`/${activeRadio}`} nav={routerInfo[activeRadio].child} />
         <SiderHead />

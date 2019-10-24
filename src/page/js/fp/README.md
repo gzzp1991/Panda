@@ -15,7 +15,7 @@ const result = [];
 for(let i=0, len = arr.length; i < len; i++) {
     const cacheItem = arr[i];
     if(cacheItem  % 2 == 0) {
-        result.push(cacheItem); 
+        result.push(cacheItem);
     }
 }
 

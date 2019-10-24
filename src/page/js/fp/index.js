@@ -7,7 +7,7 @@ class JsFp extends PureComponent {
     const { children } = this.props;
 
     return (
-      <div className="js-fp">
+      <div className="js-fp markdown-body">
         {/* {marked(README)} */}
         <Markdown>{README}</Markdown>
       </div>

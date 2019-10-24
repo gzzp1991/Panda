@@ -16,7 +16,11 @@ class LayoutHeader extends PureComponent {
   // };
 
   render() {
-    return <div className="layout-header" />;
+    return (
+      <div className="layout-header">
+        
+      </div>
+    );
   }
 }
 
