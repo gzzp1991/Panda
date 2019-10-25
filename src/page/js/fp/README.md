@@ -8,7 +8,7 @@
 
 ![](https://qqadapt.qpic.cn/txdocpic/0/18ac948c62b55740d3040b9bba34dbb8/0)
 
-```js
+```
 // 命令式编程,关注实现过程
 const arr = [1, 2, 3, 4, 5];
 const result = [];
@@ -18,17 +18,14 @@ for(let i=0, len = arr.length; i < len; i++) {
         result.push(cacheItem);
     }
 }
-
 // 声明式编程 告知机器做什么，隐藏具体的实现细节
 const arr = [1, 2, 3, 4, 5];
 arr.filter((item) => item % 2 == 0);
-
 // 函数式编程，纯函数实现
 const arr = [1, 2, 3, 4, 5];
 function findOddNumber(res) {
    return res.filter((item) => item % 2 == 0);
 }
-
 findOddNumber(arr);
 ```
 
@@ -66,7 +63,7 @@ FP难以编写，但易于维护（更容易推理）。OOP更容易编写，但
 
 假设我们有这么个需求，我们登记了一系列人名存在数组中，现在需要对这个结构进行一些修改，需要把字符串数组变成一个对象数组，方便后续的扩展，并且需要把人名做一些转换：
 
-```javascript
+```
 ['john-reese', 'harold-finch', 'sameen-shaw'] 
 // 转换成
 [{name: 'John Reese'}, {name: 'Harold Finch'}, {name: 'Sameen Shaw'}]
@@ -76,7 +73,7 @@ FP难以编写，但易于维护（更容易推理）。OOP更容易编写，但
 
 用传统的编程思路，我们一上来就可以撸代码，临时变量，循环走起来：
 
-```javascript
+```
 const arr = ['john-reese', 'harold-finch', 'sameen-shaw'];
 const newArr = [];
 for (let i = 0, len = arr.length; i < len ; i++) {
@@ -136,19 +133,16 @@ convert2Obj :: String -> Object
 
 好了，我们的任务完成了，可以 [运行代码](https://codepen.io/voidsky/pen/NQOYjj)
 
-```javascript
+```
 const capitalize = x => x[0].toUpperCase() + x.slice(1).toLowerCase();
-
 const genObj = curry((key, x) => {
   let obj = {};
   obj[key] = x;
   return obj;
 })
-
 const capitalizeName = compose(join(' '), map(capitalize), split('-'));
 const convert2Obj = compose(genObj('name'), capitalizeName)
 const convertName = map(convert2Obj);
-
 convertName(['john-reese', 'harold-finch', 'sameen-shaw'])
 ```
 
@@ -164,7 +158,7 @@ convertName(['john-reese', 'harold-finch', 'sameen-shaw'])
 
 所以，**函数**实际上是一个**关系**，或者说是一种映射，而这种映射关系是可以组合的，一旦我们知道一个函数的输出类型可以匹配另一个函数的输入，那他们就可以进行组合。还记得之前写的 `convert2Obj`这个函数：
 
-```javascript
+```
 const convert2Obj = compose(genObj('name'), capitalizeName)
 ```
 
@@ -223,7 +217,7 @@ map :: [a] -> [b]
 
 而在 JS 中，我们经常可以看到下面这种对 `map` 的 “错误” 用法，把 `map` 当作一个循环语句，然后去直接修改数组中的值。
 
-```javascript
+```
 const list = [...];
 // 修改 list 中的 type 和 age
 list.map(item => {
@@ -235,7 +229,7 @@ list.map(item => {
 
 这样函数最主要的输出功能没有了，变成了直接修改了外部变量，这就是它的副作用。而没有副作用的写法应该是：
 
-```javascript
+```
 const list = [...];
 // 修改 list 中的 type 和 age
 const newList = list.map(item => ({...item, type: 1, age:item.age + 1}));
@@ -245,7 +239,7 @@ const newList = list.map(item => ({...item, type: 1, age:item.age + 1}));
 
 ### 纯函数 (pure functions)
 
-纯函数算是在 “没有副作用” 的要求上再进一步了。相信你已经在很多地方接触过这个词，在 [Redux 的三大原则中](https://redux.js.org/introduction/three-principles)，我们看到，它要求所有的修改必须使用纯函数。
+纯函数算是在 “没有副作用” 的要求上再进一步了。相信你已经在很多地方接触过这个词，在 [Redux 的三大原则中](https://redux..org/introduction/three-principles)，我们看到，它要求所有的修改必须使用纯函数。
 
 > Changes are made with pure functions
 
@@ -258,26 +252,21 @@ const newList = list.map(item => ({...item, type: 1, age:item.age + 1}));
 
 以下几个函数都是不纯的，因为他们都依赖外部变量，试想一下，如果有人调用了 `changeName` 对 `curUser` 进行了修改，然后你在另外的地方调用了 `saySth` ，这样就会产生你预料之外的结果。
 
-```js
+```
 let arr = [1,2,3];                                            
 arr.slice(0,3);                                             //是纯函数
 arr.splice(0,3);                                            //不是纯函数，对外有影响
-
 function add(x,y){                                          // 是纯函数   
    return x + y                                             // 无状态，无副作用，无关时序，幂等
 }                                                           // 输入参数确定，输出结果是唯一确定
-
 let count = 0;                                              //不是纯函数 
 function addCount(){                                        //输出不确定
     count++
     return count; // 有副作用
 }
-
 function random(min,max){                                   // 不是纯函数     
     return Math.floor(Math.random() * ( max - min)) + min    // 输出不确定
 }                                                           // 但注意它没有副作用
-
-
 function setColor(el, color) {                                 //不是纯函数 
     el.style.color =  color ;                                //直接操作了DOM，对外有副作用
 }
@@ -290,7 +279,7 @@ function setColor(el, color) {                                 //不是纯函数
 - **便于测试和优化**：这个意义在实际项目开发中意义非常大，由于纯函数对于相同的输入永远会返回相同的结果，因此我们可以轻松断言函数的执行结果，同时也可以保证函数的优化不会影响其他代码的执行。这十分符合**测试驱动开发 TDD（Test-Driven Development )** 的思想，这样产生的代码往往健壮性更强。
 - **可缓存性**：因为相同的输入总是可以返回相同的输出，因此，我们可以提前缓存函数的执行结果，有很多库有所谓的 `memoize` 函数，下面以一个简化版的 `memoize` 为例，这个函数就能缓存函数的结果，对于像 `fibonacci` 这种计算，就可以起到很好的缓存效果。
 
-```javascript
+```
   function memoize(fn) {
     const cache = {};
     return function() {
@@ -303,7 +292,6 @@ function setColor(el, color) {                                 //不是纯函数
       return value[0];
     }
   }
-
   const fibonacci = memoize(n => n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2));
   console.log(fibonacci(4))  // 执行后缓存了 fibonacci(2), fibonacci(3),  fibonacci(4)
   console.log(fibonacci(10)) // fibonacci(2), fibonacci(3),  fibonacci(4) 的结果直接从缓存中取出，同时缓存其他的
@@ -324,20 +312,19 @@ function setColor(el, color) {                                 //不是纯函数
 
 柯里化的意思是将一个多元函数，转换成一个依次调用的**单元函数**。
 
-```javascript
+```
 f(a,b,c) → f(a)(b)(c)
 ```
 
 我们尝试写一个 `curry` 版本的 `add` 函数
 
-```javascript
+```
 var add = function(x) {
   return function(y) {
     return x + y;
   }; 
 };
 const increment = add(1);
-
 increment(10); // 11
 ```
 
@@ -349,7 +336,7 @@ increment(10); // 11
 
 经常有人搞不清柯里化和**部分函数应用** ( Partial Function Application )，经常把他们混为一谈，其实这是不对的，在维基百科里有明确的定义，部分函数应用强调的是固定一定的参数，返回一个**更小元的函数**。通过以下表达式展示出来就明显了：
 
-```javascript
+```
 // 柯里化
 f(a,b,c) → f(a)(b)(c)
 // 部分函数调用
@@ -358,14 +345,13 @@ f(a,b,c) → f(a)(b,c) / f(a,b)(c)
 
 **柯里化**强调的是**生成单元函数**，**部分函数应用**的强调的**固定任意元参数**，而我们平时生活中常用的其实是**部分函数应用**，这样的好处是可以固定参数，降低函数通用性，提高函数的适合用性。
 
-```javascript
+```
 // 假设一个通用的请求 API
 const request = (type, url, options) => ...
 // GET 请求
 request('GET', 'http://....')
 // POST 请求
 request('POST', 'http://....')
-
 // 但是通过部分调用后，我们可以抽出特定 type 的 request
 const get = request('GET');
 get('http://', {..})
@@ -375,7 +361,7 @@ get('http://', {..})
 
 通常我们不会自己去写 `curry` 函数，现成的库大多都提供了 `curry` 函数的实现，但是使用过的人肯定有会有疑问，我们使用的 Lodash，Ramda 这些库中实现的 `curry` 函数的行为好像和柯里化不太一样呢，他们实现的好像是部分函数应用呢？
 
-```javascript
+```
 const add = R.curry((x, y, z) =>  x + y + z);
 const add7 = add(7);
 add7(1,2) // 10
@@ -387,7 +373,7 @@ add1_2(7) // 10
 
 所以上面的 `add7(1, 2)` 能直接输出结果不是因为 `add(7)` 返回了一个接受 2 个参数的函数，而是你刚好传了 2 个参数，满足了所有参数，因此给你计算了结果，下面的代码就很明显了：
 
-```javascript
+```
 const add = R.curry((x, y, z) =>  x + y + z);
 const add7 = add(7);
 add(7)(1) // function
@@ -401,7 +387,7 @@ add(7)(1) // function
 
 通常，我们在实践中使用柯里化都是为了把某个函数变得单值化，这样可以增加函数的多样性，使得其适用性更强：
 
-```javascript
+```
 const replace = curry((a, b, str) => str.replace(a, b));
 const replaceSpaceWith = replace(/\s*/);
 const replaceSpaceWithComma = replaceSpaceWith(',');
@@ -420,9 +406,8 @@ const replaceSpaceWithDash = replaceSpaceWith('-');
 
 函数组合的目的是将多个函数组合成一个函数。下面来看一个简化版的实现：
 
-```javascript
+```
 const compose = (f, g) => x => f(g(x))
-
 const f = x => x + 1;
 const g = x => x * 2;
 const fg = compose(f, g);
@@ -431,25 +416,23 @@ fg(1) //3
 
 我们可以看到 `compose` 就实现了一个简单的功能：形成了一个全新的函数，而这个函数就是一条从 `g -> f` 的流水线。同时我们可以很轻易的发现 `compose` 其实是满足结合律的
 
-```javascript
+```
 compose(compose(f, g), t) = compose(compose(f, g), t)  = f(g(t(x)))
 ```
 
 只要其顺序一致，最后的结果是一致的，因此，我们可以写个更高级的 `compose`，支持多个函数组合：
 
-```javascript
+```
 compose(f, g, t) => x => f(g(t(x))
 ```
 
 简单实现如下：
 
-```javascript
+```
 const compose = (...fns) => (...args) => fns.reduceRight((val, fn) => fn.apply(null, [].concat(val)), args);
-
 const f = x => x + 1;
 const g = x => x * 2;
 const t = (x, y) => x + y;
-
 let fgt = compose(f, g, t);
 fgt(1, 2); // 3 -> 6 -> 7
 ```
@@ -460,7 +443,7 @@ fgt(1, 2); // 3 -> 6 -> 7
 
 命令式的写法：
 
-```javascript
+```
 log(toUpperCase(b))
 const a = reverse(arr)
 const b = head(a)
@@ -468,7 +451,7 @@ const b = head(a)
 
 面向对象的写法：
 
-```javascript
+```
 arr.reverse()
   .head()
   .toUpperCase()
@@ -479,7 +462,7 @@ arr.reverse()
 
 再看看，现在通过组合，我们如何实现之前的功能：
 
-```javascript
+```
 const upperLastItem = compose(log, toUpperCase, head, reverse);
 ```
 
@@ -497,7 +480,7 @@ ps -ef | grep nginx
 
 只是管道的执行方向和 compose (从右往左的组合 ) 好像刚好相反，因此很多函数库（Lodash，Ramda）中也提供了另一种组合方式：`pipe`（从左往右的组合）
 
-```javascript
+```
 const upperLastItem = R.pipe(reverse, head, toUppderCase, log);
 ```
 
@@ -509,7 +492,7 @@ const upperLastItem = R.pipe(reverse, head, toUppderCase, log);
 
 函数组合的好处显而易见，它让代码变得简单而富有可读性，同时通过不同的组合方式，我们可以轻易组合出其他常用函数，让我们的代码更具表现力
 
-```javascript
+```
 // 组合方式 1
 const last = compose(head, reverse);
 const shout = compose(log, toUpperCase);
@@ -533,7 +516,7 @@ const logLastUpper = compose(log, lastUppder);
 
 因为我们的输出通常是需要操作的数据，这样当我们固定了之前的参数（我们可以称为**配置**）后，可以变成一个单元函数，直接被**函数组合**使用，这也是其他的函数式语言遵循的规范：
 
-```javascript
+```
 const split = curry((x, str) => str.split(x));
 const join = curry((x, arr) => arr.join(x));
 const replaceSpaceWithComma = compose(join(','), split(' '));
@@ -542,7 +525,7 @@ const replaceCommaWithDash = compose(join('-'), split(','));
 
 但是如果有些函数没遵循这个约定，我们的函数该如何组合？当然也不是没办法，很多库都提供了占位符的概念，例如 Ramda 提供了一个占位符号（`R.__`）。假设我们的 `split` 把 `str` 放在首位
 
-```javascript
+```
 const split = curry((str, x) => str.split(x));
 const replaceSpaceWithComma = compose(join(','), split(R.__, ' '));
 ```
@@ -555,7 +538,7 @@ const replaceSpaceWithComma = compose(join(','), split(R.__, ' '));
 
 当遇到函数出错的时候怎么办？我们想知道在哪个环节出错了，这时候，我们可以借助一个辅助函数 `trace`，它会临时输出当前阶段的结果。
 
-```javascript
+```
 const trace = curry((tip, x) => { console.log(tip, x); return x; });
 const lastUppder = compose(toUpperCase, head, trace('after reverse'), reverse);
 ```
@@ -584,7 +567,7 @@ const lastUppder = compose(toUpperCase, head, trace('after reverse'), reverse);
 
 引入它的好处显而易见，短短一行，就能暴露函数的行为和目的，方便我们了解语义。有时候一个函数可能很长，光从代码上很难理解它到底做了什么：
 
-```javascript
+```
 const replace = reg => sub => str => str.replace(reg, sub);
 ```
 
@@ -592,14 +575,14 @@ const replace = reg => sub => str => str.replace(reg, sub);
 
 例如这个 replace ，通过类型签名我们知道它接受一个 `正则表达` 式和两个 `String`，最后会返回一个 `String`。
 
-```javascript
+```
 //  replace :: Regex -> String -> String -> String
 const replace = reg => sub => str => str.replace(reg, sub);
 ```
 
 这样的连续箭头看起来可能很头疼，其实稍微组合一下可以发现，它就是柯里化的意思：先传一个 `正则表达式` 会返回一个函数，如果再传一个 `String`，也会返回函数……直到你输入了最后一个 `String`，就会返回一个 `String` 的结果。
 
-```javascript
+```
 //  replace :: Regex -> （String -> （String -> String))
 ```
 
@@ -607,21 +590,21 @@ const replace = reg => sub => str => str.replace(reg, sub);
 
 例如 join 函数通过类型签名很明显是传入一个 String 的配置，然后就可以将一个 `String 数组` 转换成 `String`。
 
-```javascript
+```
 // join :: String -> [String] -> String
 const join = curry((sep, arr) => arr.join(sep));
 ```
 
 同样，下面这个函数，它接受一个 `String`，然后经过 strLen 转换能返回一个 `Number`。
 
-```javascript
+```
 // strLen :: String -> Number
 const strLen = str => str.length();
 ```
 
 那我们很容易知道，以上两个函数完全可以组合，因为他们输入和输出类型一致，通过组合我们可以完成一个 `String 数组` 到 `Number` 的流水线。
 
-```javascript
+```
 const joinDash = join('-');
 const lengthWithDash = compose(strLen, joinDash);
 lengthWithDash(['abc', 'def']);  // 7
@@ -629,12 +612,11 @@ lengthWithDash(['abc', 'def']);  // 7
 
 当然还有时候你的函数可能不是接受特定的类型，而只是做一些通用的事情，此时我们可以用 a, b, c…… 这些来替代一些通用类型，例如 `map` ，它传入一个可以把 a 转换成 b 的函数，然后把`a 数组` 转换成`b 数组`。
 
-```javascript
+```
 //  map :: (a -> b) -> [a] -> [b]
 var map = curry(function(f, xs){
   return xs.map(f);
 });
-
 //  head :: [a] -> a
 var head = function(xs){ return xs[0]; }
 ```
@@ -645,10 +627,9 @@ var head = function(xs){ return xs[0]; }
 
 我之前提过一下 Pointfree 这种编程风格，它其实就是强调在整个函数编写过程中不出现参数（point），而只是通过函数的组合生成新的函数，实际数据只需要在最后使用函数的时候再传入即可。
 
-```javascript
+```
 // Pointfree  没有出现需要操作的参数
 const upperLastItem = compose(toUpperCase, head, reverse);
-
 // 非 Pointfree 出现了需要操作的参数
 const upperLastItem = arr => {
   const reverseArr = arr.reverse();
@@ -705,14 +686,13 @@ const upperLastItem = arr => {
 
 讲到函子，我们首先回到我们的问题上来。之前我们执行函数通常是下面这样。
 
-```js
+```
 function double(x) {
   return x * 2
 }
 function add5(x) {
   return x + 5
 }
-
 double(add5(1))
 // 或者
 var a = add5(5)
@@ -721,7 +701,7 @@ double(a)
 
 那现在我们想以数据为核心，一个动作一个动作去执行。
 
-```js
+```
 (5).add5().double()
 ```
 
@@ -732,7 +712,7 @@ double(a)
 
 所以我们试着去给他创建一个引用类型
 
-```js
+```
 class Num {
     constructor(value) {
         this.value = value ;
@@ -744,14 +724,13 @@ class Num {
         return this.value * 2
     }
 }
-
 var num = new Num(5);
 num.add5()
 ```
 
 我们发现这个时候有一个问题，就是我们经过调用后，返回的就是一个值了，我们没有办法进行下一步处理。所以我们需要返回一个对象。
 
-```js
+```
 class Num {
     constructor(value) {
         this.value = value ;
@@ -775,7 +754,7 @@ num.add5 ().double ()
 
 并且在真实情况中，我们也不可能为每个实例都创建这样有不同方法的构造函数，它们需要一个统一的方法。
 
-```js
+```
 class Num {
     constructor(value) {
         this.value = value ;
@@ -792,7 +771,7 @@ num.map(add5).map(double)
 
 最后我们整理一下，这个函数。
 
-```js
+```
 class Functor{
     static of(val) {
         return new Functor(val);
@@ -807,7 +786,6 @@ class Functor{
 Functor.of = function(val) {
     return new Functor(val);
 }
-
 Functor.of(5).map(add5).map(double)
 ```
 
@@ -830,7 +808,7 @@ Functor.of(5).map(add5).map(double)
 
 我们知道，在做字符串处理的时候，如果一个字符串是null, 那么对它进行toUpperCase(); 就会报错。
 
-```js
+```
 Functor.of(null).map(function(s) {
   return s.toUpperCase();
 });
@@ -840,7 +818,7 @@ Functor.of(null).map(function(s) {
 
 那么我们有没有什么办法在函子里把空值过滤掉呢。
 
-```js
+```
 class Maybe{
     static of(valt) {
         return new Maybe(val);
@@ -852,7 +830,6 @@ class Maybe{
         return this.value ? Maybe.of(fn(this.value)) : Maybe.of(null);
     }
 }
-
 var a = Maybe.of(null).map(function(s) {
   return s.toUpperCase();
 });
@@ -866,9 +843,8 @@ Monad函子也是一个函子，其实很原理简单，只不过它的功能比
 
 我们先来看这样一个例子，手敲在控制台打印一下。
 
-```js
+```
 function fn(e){ return e.value }
-
 const a = Maybe.of(Maybe.of( Maybe.of('str'))) 
 console.log(a);
 console.log(a.map(fn));
@@ -879,7 +855,7 @@ console.log(a.map(fn).map(fn));
 - 显然我们需要一层一层的解开。
 - 这样很麻烦，那么我们有没有什么办法得到里面的值呢
 
-```js
+```
 class Maybe{
     static of(valt) {
         return new Maybe(val);
@@ -898,7 +874,7 @@ class Maybe{
 
 我们想取到里面的值，就把它用join方法返回来就好了啊。所以我给它加了一个join方法
 
-```js
+```
 var  a = Maybe.of( Maybe.of('str') ) 
 console.log(a.join().map(toUpperCase))
 ```
@@ -907,7 +883,7 @@ console.log(a.join().map(toUpperCase))
 
 那么这时候我们想，既然我们在执行的时候就知道，它会有影响，那我能不能在执行的时候，就把这个应该 给消除呢。
 
-```js
+```
 class Maybe{
     static of(valt) {
         return new Maybe(val);

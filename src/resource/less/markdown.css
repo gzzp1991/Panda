@@ -691,6 +691,7 @@
   font-size: 85%;
   margin: 0;
   padding: .2em .4em;
+  white-space: pre;
 }
 
 .markdown-body pre {
