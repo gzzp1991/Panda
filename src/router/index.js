@@ -123,38 +123,28 @@ const trans = (routerInfo = {}) => {
     return null;
   }
 
-  
+  return (
+    keys.map(k => (
+      <Route path={k} component={routerInfo[k].component}>
+        {trans(routerInfo[k].child)}
+      </Route>
+    ))
+  );
 };
 
 export default () => {
   return (
     <Router history={browserHistory} >
       <Route path="/" component={Layout}>
-        <Route path="echarts" component={Echarts}>
-          <Route path="pie" component={EchartsPie} />
-          <Route path="bar" component={EchartsBar} />
-        </Route>
-
-        <Route path="test" component={Test}>
-          <Route path="react" component={TestReact} />
-          <Route path="react" component={TestReact} />
-          <Route path="update" component={TestUpdate} />
-          <Route path="hoc" component={TestHoc} />
-        </Route>
-
-        <Route path="js" component={Js}>
-          <Route path="fp" component={JsFp} />
-        </Route>
+        {trans(routerInfo)}
       </Route>
-
-      <Route path="/antd" component={Antd} />
+      {/* <Route path="/antd" component={Antd} />
       <Route path="/antd/cascader" component={Cascader} />
       <Route path="/antd/upload" component={Upload} />
       <Route path="/antd/select" component={Select} />
       <Route path="/antd/transfer" component={Transfer} />
       <Route path="/antd/inputnumber" component={InputNumber} />
-
-      <Route path="/ramda" component={Ramda} />
+      
       <Route path="/ramda/function" component={RamdaFunction} />
       <Route path="/ramda/list" component={RamdaList} />
       <Route path="/ramda/logic" component={RamdaLogic} />
@@ -163,7 +153,7 @@ export default () => {
       <Route path="/ramda/relation" component={RamdaRelation} />
       <Route path="/ramda/string" component={RamdaString} />
 
-      <Route path="/ts" component={Ts} />
+      <Route path="/ts" component={Ts} /> */}
     </Router>
   );
 };

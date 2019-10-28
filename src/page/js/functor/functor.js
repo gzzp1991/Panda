@@ -19,4 +19,4 @@ class Functor {
 
 console.log(Functor.of(2).map(add5));
 console.log(Functor.of(2).map(double));
-console.log(Functor.of(2).map(add5).map(double));
+console.log(Functor.of(2).map(double).map(add5));

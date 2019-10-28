@@ -27,4 +27,5 @@ console.log(int);
 
 console.log(Monad.of(2).map(addTwo));
 console.log(Monad.of(2).chain(addTwo));
+console.log(Monad.of(2).map(addTwo).join());
 

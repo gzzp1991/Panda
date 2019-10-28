@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 
 class Ramda extends PureComponent {
   render() {
+    const { children } = this.props;
     return (
-      <div className="ramda">ramda</div>
+      <div className="ramda">{children}</div>
     )
   }
 }
