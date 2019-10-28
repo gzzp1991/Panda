@@ -18,7 +18,7 @@ class LayoutSiderNav  extends PureComponent {
           return (
             <First path={`${path}/${f}`} first={first} key={first.code || first.name}>
               {
-                fIndex === 0 && first.child && (
+                first.child && (
                   Object.keys(first.child).map((s, sIndex) => {
                     const second = first.child[s];
                     return <Second path={`${path}/${f}/${s}`} second={second} key={second.code || second.name}/>

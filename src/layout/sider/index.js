@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import { Link } from 'react-router';
 
 import { routerInfo } from 'src/router';
 import SiderHead from './head';
