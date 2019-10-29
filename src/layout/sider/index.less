@@ -15,12 +15,22 @@
     width: 0;
   }
 
-  &-radio {
-    // flex: 1;
-  }
-
-  &-nav {
+  &-second {
     flex: 1;
     overflow: hidden auto;
+  }
+
+  // 选中时左侧样式
+  .now {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -10px;
+      width: 4px;
+      background-color: #61dafb;
+    }
   }
 }
