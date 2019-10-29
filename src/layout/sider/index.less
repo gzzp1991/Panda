@@ -3,7 +3,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: 30%;
+  width: 20%;
   // min-width: 300px;
   background-color: #f7f7f7;
   padding: 150px 0 50px;
@@ -11,12 +11,26 @@
   flex-flow: column nowrap;
   z-index: 10;
 
-  &-radio {
-    // flex: 1;
+  &-isfold {
+    width: 0;
   }
 
-  &-nav {
+  &-second {
     flex: 1;
     overflow: hidden auto;
+  }
+
+  // 选中时左侧样式
+  .now {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -10px;
+      width: 4px;
+      background-color: #61dafb;
+    }
   }
 }

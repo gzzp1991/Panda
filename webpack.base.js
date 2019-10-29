@@ -112,6 +112,7 @@ module.exports = {
       util: path.resolve(__dirname, 'src/util'),
       page: path.resolve(__dirname, 'src/page'),
       component: path.resolve(__dirname, 'src/component'),
+      less: path.resolve(__dirname, 'src/resource/less'),
     },
   },
 };

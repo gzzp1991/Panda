@@ -1,16 +1,10 @@
-import React from 'react';
-import logAlways from './always';
-import logCompose from './compose';
+import React, { PureComponent } from 'react';
 
-class RamdaFunction extends React.Component {
-  componentDidMount() {
-    logAlways();
-    logCompose();
-  }
-
+class RamdaFunction extends PureComponent {
   render() {
+    const { children } = this.props;
     return (
-      <div className="ramda-function">ramda-function</div>
+      <div className="ramda-function">{children}</div>
     )
   }
 }
