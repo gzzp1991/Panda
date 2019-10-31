@@ -113,6 +113,7 @@ module.exports = {
       page: path.resolve(__dirname, 'src/page'),
       component: path.resolve(__dirname, 'src/component'),
       less: path.resolve(__dirname, 'src/resource/less'),
+      rdx: path.resolve(__dirname, 'src/rdx'),
     },
   },
 };

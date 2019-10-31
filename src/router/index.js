@@ -12,7 +12,7 @@ const transRouter = (routerInfo = {}) => {
 
   return (
     keys.map(k => (
-      <Route path={k} component={routerInfo[k].component}>
+      <Route key={k} path={k} component={routerInfo[k].component}>
         {transRouter(routerInfo[k].child)}
       </Route>
     ))

@@ -25,7 +25,7 @@ class Layout extends PureComponent {
         <Header />
         <Sider isFold={isFold} />
         <Content isFold={isFold} updateFold={this.updateFold}>
-          {children && children}
+          {children}
         </Content>
       </div>
     );
