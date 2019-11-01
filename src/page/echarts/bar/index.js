@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react';
 import Echarts from 'echarts';
+import { connect } from 'react-redux';
 import './index.less';
 
+@connect(
+  state => ({
+    type: state.echarts.bar,
+  })
+)
 class EchartBar extends PureComponent {
   componentDidMount() {
     const option = {

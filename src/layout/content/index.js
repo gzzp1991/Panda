@@ -21,7 +21,7 @@ class LayoutContent extends PureComponent {
 
     return (
       <div className={classnames('layout-content', { 'layout-content-isfold': isFold })}>
-        {children && children}
+        {children}
         <Fold isFold={isFold} updateFold={updateFold} />
       </div>
     );
