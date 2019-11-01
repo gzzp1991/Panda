@@ -1,4 +1,6 @@
-import { CLEAR_TYPE } from 'rdx/type/echarts/pie';
+import TYPE from 'rdx/type/echarts/pie';
+
+const { CLEAR_TYPE } = TYPE;
 
 const initialState = {
   type: 'echart.pie'

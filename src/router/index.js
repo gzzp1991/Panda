@@ -19,12 +19,8 @@ const transRouter = (routerInfo = {}) => {
   );
 };
 
-export default () => {
-  return (
-    <Router history={browserHistory} >
-      <Route path="/" component={Layout}>
-        {transRouter(routerInfo)}
-      </Route>
-    </Router>
-  );
-};
+export default (
+  <Route path="/" component={Layout}>
+    {transRouter(routerInfo)}
+  </Route>
+);

@@ -1,4 +1,6 @@
-import { CLEAR_TYPE } from 'rdx/type/echarts/bar';
+import TYPE from 'rdx/type/echarts/bar';
+
+const { CLEAR_TYPE } = TYPE;
 
 const initialState = {
   type: 'echart.bar'

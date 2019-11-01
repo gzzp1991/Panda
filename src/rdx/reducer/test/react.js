@@ -1,4 +1,6 @@
-import { CLEAR_TYPE } from 'rdx/type/test/react';
+import TYPE from 'rdx/type/test/react';
+
+const { CLEAR_TYPE } = TYPE;
 
 const initialState = {
   type: 'test.react'

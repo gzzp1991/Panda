@@ -6,9 +6,10 @@ import './index.less';
 @connect(
   state => ({
     type: state.echarts.bar,
-  })
+  }),
+  null,
 )
-class EchartBar extends PureComponent {
+class EchartsBar extends PureComponent {
   componentDidMount() {
     const option = {
       // 自定义文字
@@ -73,4 +74,4 @@ class EchartBar extends PureComponent {
   }
 }
 
-export default EchartBar;
+export default EchartsBar;

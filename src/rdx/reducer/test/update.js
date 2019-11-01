@@ -1,4 +1,6 @@
-import { CLEAR_TYPE } from 'rdx/type/test/update';
+import TYPE from 'rdx/type/test/update';
+
+const { CLEAR_TYPE } = TYPE;
 
 const initialState = {
   type: 'test.update'
