@@ -1,0 +1,14 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react"],
+  "extends": ["airbnb", "eslint:recommended"],
+  "rules": {
+    "no-unused-vars": 0
+  }
+}
