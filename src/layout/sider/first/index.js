@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 import classnames from 'classnames';
 import SiderSecond from '../second';
 import './index.less';
 
+@withRouter
 class LayoutSiderFirst extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,8 +16,10 @@ class LayoutSiderFirst extends PureComponent {
   onClick = (evt, child, path) => {
     const rCode = evt.target.getAttribute('data-rcode');
     this.setState({ active: rCode });
+
+    const { history } = this.props;
     if (!child) {
-      browserHistory.push(path);
+      history.push(path);
     }
   };
 

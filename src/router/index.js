@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, Router, browserHistory } from 'react-router';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Layout from 'src/layout';
 import routerInfo from './info';
 
-const transRouter = (routerInfo = {}) => {
+const transRouter = (routerInfo = {}, url) => {
   const keys = Object.keys(routerInfo);
 
   if (keys.length === 0) {
@@ -11,16 +11,25 @@ const transRouter = (routerInfo = {}) => {
   }
 
   return (
-    keys.map(k => (
-      <Route key={k} path={k} component={routerInfo[k].component}>
-        {transRouter(routerInfo[k].child)}
-      </Route>
-    ))
+    <Switch>
+      {keys.map(k => {
+        const { component: Farther, child } = routerInfo[k];
+        return (
+          <Route key={k} path={`${url}/${k}`} render={({ match: { url } }) => (
+            <Farther>{transRouter(child, url)}</Farther>
+          )} />
+        );
+      })}
+    </Switch>
   );
 };
 
-export default (
-  <Route path="/" component={Layout}>
-    {transRouter(routerInfo)}
-  </Route>
+export default () => (
+  <BrowserRouter>
+    <Route path="/" render={() => (
+      <Layout>
+        {transRouter(routerInfo, '')}
+      </Layout>
+    )} />
+  </BrowserRouter>
 );

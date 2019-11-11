@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router';
 // import Icon from 'component/icon';
 import SiderThird from '../third';
 import './index.less';
 
+@withRouter
 class LayoutSiderSecond extends PureComponent {
   onClick = (child, path) => {
+    const { history } = this.props;
     if (!child) {
-      browserHistory.push(path);
+      history.push(path);
     }
   };
 

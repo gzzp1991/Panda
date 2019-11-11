@@ -3,12 +3,12 @@ import Echarts from 'echarts';
 import { connect } from 'react-redux';
 import './index.less';
 
-@connect(
-  state => ({
-    type: state.echarts.bar,
-  }),
-  null,
-)
+// @connect(
+//   state => ({
+//     type: state.echarts.bar,
+//   }),
+//   null,
+// )
 class EchartsBar extends PureComponent {
   componentDidMount() {
     const option = {
