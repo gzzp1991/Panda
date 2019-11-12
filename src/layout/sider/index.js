@@ -10,7 +10,10 @@ class LayoutSider extends PureComponent {
     const { isFold } = this.props;
 
     return (
-      <div className={classnames('layout-sider', { 'layout-sider-isfold': isFold })}>
+      <div
+        className={classnames('layout-sider', {
+          'layout-sider-isfold': isFold,
+        })}>
         <SiderFirst path="" routes={routerInfo} />
       </div>
     );

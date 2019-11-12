@@ -47,17 +47,13 @@ export function compare(a, b, sign) {
     !/^(string|number)$/.test(typeOfA) ||
     !/^(string|number)$/.test(typeOfB)
   ) {
-    throw new Error(
-      `比较数的类型需为数字或字符串(数字类型)`
-    );
+    throw new Error('比较数的类型需为数字或字符串(数字类型)');
   }
 
   let comparison;
   if (typeOfA === 'string' && typeOfB === 'string') {
     if (!/^\d+$/.test(a) || !/^\d+$/.test(b)) {
-      throw new Error(
-        `不能包含除0-9之外的其他字符`
-      );
+      throw new Error('不能包含除0-9之外的其他字符');
     }
     const lenA = a.length;
     const lenB = b.length;
@@ -66,24 +62,14 @@ export function compare(a, b, sign) {
     } else if (lenA < lenB) {
       comparison = '<';
     } else {
-      comparison =
-        a === b
-          ? '='
-          : a < b
-            ? '<'
-            : '>';
+      comparison = a === b ? '=' : a < b ? '<' : '>';
     }
   }
   if (typeOfA === 'number' && typeOfB === 'number') {
     if (BigInt) {
       const bigA = BigInt(a);
       const bigB = BigInt(b);
-      comparison =
-        bigA === bigB
-          ? '='
-          : bigA < bigB
-            ? '<'
-            : '>';
+      comparison = bigA === bigB ? '=' : bigA < bigB ? '<' : '>';
     }
   }
   switch (sign) {
@@ -102,9 +88,7 @@ export function compare(a, b, sign) {
     case '!==':
       return comparison !== '=';
     default:
-      throw new Error(
-        `比较符号必须是< <= > >= == === !== ===之一`
-      );
+      throw new Error(`比较符号必须是< <= > >= == === !== ===之一`);
   }
 }
 
@@ -114,16 +98,16 @@ export const compose = (...funcs) => {
     return arg => arg;
   }
   if (len === 1) {
-    return funcs[0]
+    return funcs[0];
   }
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
-}
+};
 
 // timeTaking
 export const timeTaking = (cb, count = 10000) => {
   const start = new Date().getTime();
   let i = 0;
-  while(i++ < count) {
+  while (i++ < count) {
     cb();
   }
   const end = new Date().getTime();

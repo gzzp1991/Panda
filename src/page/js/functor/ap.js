@@ -6,9 +6,11 @@ class Ap {
   constructor(value) {
     this.value = value;
   }
+
   static of(value) {
     return new Ap(value);
   }
+
   ap(AP) {
     return Ap.of(this.value(AP.value));
   }
