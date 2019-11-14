@@ -1,6 +1,6 @@
-import React from "react";
-import _ from "lodash";
-import { Responsive, WidthProvider } from "react-grid-layout";
+import React from 'react';
+import _ from 'lodash';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import PieChart from 'page/echarts/pie';
 import './index.less';
 
@@ -12,8 +12,7 @@ class ToolBoxItem extends React.Component {
     return (
       <div
         className={`${className} toolbox__items__item`}
-        onClick={this.props.onTakeItem.bind(undefined, item)}
-      >
+        onClick={this.props.onTakeItem.bind(undefined, item)}>
         {item.i}
       </div>
     );
@@ -41,19 +40,19 @@ class ToolBox extends React.Component {
 
 class ShowcaseLayout extends React.Component {
   static defaultProps = {
-    className: "layout",
+    className: 'layout',
     rowHeight: 30,
     onLayoutChange: function() {},
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
-    initialLayout: generateLayout()
+    initialLayout: generateLayout(),
   };
 
   state = {
-    currentBreakpoint: "lg",
-    compactType: "vertical",
+    currentBreakpoint: 'lg',
+    compactType: 'vertical',
     mounted: false,
     layouts: { lg: this.props.initialLayout },
-    toolbox: { lg: [] }
+    toolbox: { lg: [] },
   };
 
   componentDidMount() {
@@ -63,15 +62,14 @@ class ShowcaseLayout extends React.Component {
   generateDOM() {
     return _.map(this.state.layouts[this.state.currentBreakpoint], (l, i) => {
       return (
-        <div key={l.i} className={l.static ? "static" : ""}>
+        <div key={l.i} className={l.static ? 'static' : ''}>
           <div className="hide-button" onClick={this.onPutItem.bind(this, l)}>
             &times;
           </div>
           {l.static ? (
             <span
               className="text"
-              title="This item is static and cannot be removed or resized."
-            >
+              title="This item is static and cannot be removed or resized.">
               Static - {l.i}
             </span>
           ) : (
@@ -91,17 +89,19 @@ class ShowcaseLayout extends React.Component {
         [breakpoint]:
           prevState.toolbox[breakpoint] ||
           prevState.toolbox[prevState.currentBreakpoint] ||
-          []
-      }
+          [],
+      },
     }));
   };
 
   onCompactTypeChange = () => {
     const { compactType: oldCompactType } = this.state;
     const compactType =
-      oldCompactType === "horizontal"
-        ? "vertical"
-        : oldCompactType === "vertical" ? null : "horizontal";
+      oldCompactType === 'horizontal'
+        ? 'vertical'
+        : oldCompactType === 'vertical'
+        ? null
+        : 'horizontal';
     this.setState({ compactType });
   };
 
@@ -111,15 +111,15 @@ class ShowcaseLayout extends React.Component {
         ...prevState.toolbox,
         [prevState.currentBreakpoint]: prevState.toolbox[
           prevState.currentBreakpoint
-        ].filter(({ i }) => i !== item.i)
+        ].filter(({ i }) => i !== item.i),
       },
       layouts: {
         ...prevState.layouts,
         [prevState.currentBreakpoint]: [
           ...prevState.layouts[prevState.currentBreakpoint],
-          item
-        ]
-      }
+          item,
+        ],
+      },
     }));
   };
 
@@ -130,15 +130,15 @@ class ShowcaseLayout extends React.Component {
           ...prevState.toolbox,
           [prevState.currentBreakpoint]: [
             ...(prevState.toolbox[prevState.currentBreakpoint] || []),
-            item
-          ]
+            item,
+          ],
         },
         layouts: {
           ...prevState.layouts,
           [prevState.currentBreakpoint]: prevState.layouts[
             prevState.currentBreakpoint
-          ].filter(({ i }) => i !== item.i)
-        }
+          ].filter(({ i }) => i !== item.i),
+        },
       };
     });
   };
@@ -150,7 +150,7 @@ class ShowcaseLayout extends React.Component {
 
   onNewLayout = () => {
     this.setState({
-      layouts: { lg: generateLayout() }
+      layouts: { lg: generateLayout() },
     });
   };
 
@@ -158,14 +158,12 @@ class ShowcaseLayout extends React.Component {
     return (
       <div>
         <div>
-          Current Breakpoint: {this.state.currentBreakpoint} ({
-            this.props.cols[this.state.currentBreakpoint]
-          }{" "}
-          columns)
+          Current Breakpoint: {this.state.currentBreakpoint} (
+          {this.props.cols[this.state.currentBreakpoint]} columns)
         </div>
         <div>
-          Compaction type:{" "}
-          {_.capitalize(this.state.compactType) || "No Compaction"}
+          Compaction type:{' '}
+          {_.capitalize(this.state.compactType) || 'No Compaction'}
         </div>
         <button onClick={this.onNewLayout}>Generate New Layout</button>
         <button onClick={this.onCompactTypeChange}>
@@ -188,8 +186,7 @@ class ShowcaseLayout extends React.Component {
           // and set `measureBeforeMount={true}`.
           useCSSTransforms={this.state.mounted}
           compactType={this.state.compactType}
-          preventCollision={!this.state.compactType}
-        >
+          preventCollision={!this.state.compactType}>
           {this.generateDOM()}
         </ResponsiveReactGridLayout>
       </div>
@@ -208,7 +205,7 @@ function generateLayout() {
       w: 2,
       h: y,
       i: i.toString(),
-      static: Math.random() < 0.05
+      static: Math.random() < 0.05,
     };
   });
 }

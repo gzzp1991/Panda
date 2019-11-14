@@ -4,11 +4,7 @@ import s2 from '../ramda';
 class Test extends PureComponent {
   render() {
     const { children } = this.props;
-    return (
-      <div className="test">
-        {children}
-      </div>
-    )
+    return <div className="test">{children}</div>;
   }
 }
 

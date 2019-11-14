@@ -2,7 +2,7 @@ import React from 'react';
 import PropsProxy from './propsProxy';
 import ReverseInherit from './reverseInherit';
 
-class TestHoc extends React.Component {
+class TestHoc extends React.PureComponent {
   render() {
     return (
       <div className="test-hoc">
@@ -10,7 +10,7 @@ class TestHoc extends React.Component {
         <PropsProxy />
         <ReverseInherit />
       </div>
-    )
+    );
   }
 }
 

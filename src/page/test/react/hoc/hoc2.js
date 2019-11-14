@@ -6,14 +6,14 @@ function funcChildHoc(WrapperComponent) {
     static testStaticProp = 'test';
 
     render() {
-      return <WrapperComponent {...this.props} />
+      return <WrapperComponent {...this.props} />;
     }
   }
 
   hoistNonReactStatic(TestComponent, WrapperComponent);
   // TestComponent.childStaticProp = WrapperComponent.childStaticProp;
   return TestComponent;
-};
+}
 
 @funcChildHoc
 class Child extends React.Component {
@@ -24,7 +24,7 @@ class Child extends React.Component {
   }
 
   render() {
-    return <div>Child</div>
+    return <div>Child</div>;
   }
 }
 
@@ -43,7 +43,7 @@ class TestReactHoc2 extends React.Component {
         test-react-hoc-2
         <Child ref={this.childRef} />
       </div>
-    )
+    );
   }
 }
 

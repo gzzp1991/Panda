@@ -5,7 +5,7 @@ class TestReactLifecycle extends React.Component {
   constructor(props) {
     super(props);
     this.state = { count: 0 };
-  };
+  }
 
   getSnapshotBeforeUpdate(preProps, preState) {
     console.log('getSnapshotBeforeUpdate ', preProps, preState);
@@ -24,7 +24,7 @@ class TestReactLifecycle extends React.Component {
         <Button onClick={this.increase}>click</Button>
         <div>{count}</div>
       </div>
-    )
+    );
   }
 }
 

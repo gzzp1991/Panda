@@ -7,12 +7,12 @@ class TestReactKey extends React.Component {
     this.state = {
       key: 1,
     };
-  };
+  }
 
   componentDidMount() {
     this.setState({
       key: 2,
-    })
+    });
   }
 
   render() {
@@ -21,7 +21,7 @@ class TestReactKey extends React.Component {
       <div className="test-react-key">
         <Son key={key} />
       </div>
-    )
+    );
   }
 }
 

@@ -9,16 +9,12 @@ class Mouse extends React.Component {
         y: 2,
       },
     };
-  };
+  }
 
   render() {
     const { children } = this.props;
     const { pos } = this.state;
-    return (
-      <div className="test-react-render-mouse">
-        {children(pos)}
-      </div>
-    )
+    return <div className="test-react-render-mouse">{children(pos)}</div>;
   }
 }
 

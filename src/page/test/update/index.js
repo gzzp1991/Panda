@@ -7,18 +7,18 @@ class TestUpdate extends React.Component {
     this.state = {
       jse: {
         a: {
-          b:{
+          b: {
             c: 2,
-          }
-        }
+          },
+        },
       },
     };
-  };
+  }
 
   componentDidMount() {
     setInterval(() => {
       const { jse } = this.state;
-      jse.a.b.c = jse.a.b.c + 1;
+
       this.setState({ jse });
     }, 1000);
   }
@@ -31,7 +31,7 @@ class TestUpdate extends React.Component {
         TestUpdate
         <Son jse={jse} />
       </div>
-    )
+    );
   }
 }
 

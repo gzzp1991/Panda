@@ -1,26 +1,72 @@
 {
+  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "plugins": ["react"],
-  "extends": ["airbnb", "eslint:recommended", "plugin:prettier/recommended"],
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "linebreak-style": [0, "error", "windows"],
-    "no-unused-vars": 0,
-    "react/prop-types": 0,
+    "no-nested-ternary": 1,
+    "prefer-rest-params": 1,
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
+    "import/no-unresolved": 0,
+    "no-console": 0,
+    "no-shadow": 0,
+    "class-methods-use-this": 0,
+    // "linebreak-style": ["error", "windows"],
+    // 修改airbnb及eslint自带部分规则
+    // type效验
+    "react/prop-types": 0,
+    "no-bitwise": 0,
+    // 数组的key不能使用数组的index
+    "react/no-array-index-key": 1,
+    // 允许在 for 循环的最后一个表达式中使用 ++ 和 --
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    // 驼峰命名
+    "camelcase": 0,
+    "linebreak-style": 0,
+    // 未使用变量
+    "no-unused-vars": 1,
+    // 将>多行JSX元素放在末尾单独放在下一行
     "react/jsx-closing-bracket-location": 0,
-    "import/no-unresolved": 0
+    // click事件应该对应一个键盘事件
+    "jsx-a11y/click-events-have-key-events": 0,
+    // 通过role语义化元素
+    "jsx-a11y/no-static-element-interactions": 0,
+    // 使用jsx语法的文件得是jsx后缀
+    // "react/jsx-filename-extension": 0,
+    // jsx indent(导致jsx中缩进不对)
+    "react/jsx-indent": 0,
+    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+    "import/no-extraneous-dependencies": 0,
+    // 对锚链接做验证
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-param-reassign": 0,
+    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    // require需要写在顶层域
+    "global-require": 1,
+    // 一个文件中不能出现多个react component
+    "react/no-multi-comp": 0,
+    // 禁止标识符中有悬空下划线
+    "no-underscore-dangle": 0
   }
 }

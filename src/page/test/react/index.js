@@ -7,7 +7,7 @@ import Lifecycle from './lifecycle';
 import Hoc from './hoc';
 import ReactGridLayout from './reactGridLayout';
 
-class TestReact extends React.Component {
+class TestReact extends React.PureComponent {
   render() {
     return (
       <div className="test-react">
@@ -20,7 +20,7 @@ class TestReact extends React.Component {
         <Hoc /> */}
         <ReactGridLayout />
       </div>
-    )
+    );
   }
 }
 

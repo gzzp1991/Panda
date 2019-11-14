@@ -19,7 +19,7 @@ class TestReactKeySon extends React.Component {
       <div key={key} className="test-react-key-son">
         test-react-key-son
       </div>
-    )
+    );
   }
 }
 

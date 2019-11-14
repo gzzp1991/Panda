@@ -80,7 +80,7 @@ export default {
             name: 'always',
             component: RamdaFunctionAlways,
           },
-        }
+        },
       },
       list: {
         name: 'list',
@@ -118,5 +118,5 @@ export default {
         component: JsFp,
       },
     },
-  }
+  },
 };

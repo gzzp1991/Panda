@@ -15,9 +15,13 @@ const transRouter = (routerInfo = {}, url) => {
       {keys.map(k => {
         const { component: Farther, child } = routerInfo[k];
         return (
-          <Route key={k} path={`${url}/${k}`} render={({ match: { url } }) => (
-            <Farther>{transRouter(child, url)}</Farther>
-          )} />
+          <Route
+            key={k}
+            path={`${url}/${k}`}
+            render={({ match: { url } }) => (
+              <Farther>{transRouter(child, url)}</Farther>
+            )}
+          />
         );
       })}
     </Switch>
@@ -26,10 +30,9 @@ const transRouter = (routerInfo = {}, url) => {
 
 export default () => (
   <BrowserRouter>
-    <Route path="/" render={() => (
-      <Layout>
-        {transRouter(routerInfo, '')}
-      </Layout>
-    )} />
+    <Route
+      path="/"
+      render={() => <Layout>{transRouter(routerInfo, '')}</Layout>}
+    />
   </BrowserRouter>
 );

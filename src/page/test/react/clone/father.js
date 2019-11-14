@@ -16,18 +16,13 @@ class Father extends React.Component {
   render() {
     const { children } = this.props;
     const { count } = this.state;
-    const childrens = React.Children.map(
-      children,
-      child => React.cloneElement(child, {
+    const childrens = React.Children.map(children, child =>
+      React.cloneElement(child, {
         count,
         add: this.add,
-      })
+      }),
     );
-    return (
-      <div className="father">
-        {childrens}
-      </div>
-    )
+    return <div className="father">{childrens}</div>;
   }
 }
 

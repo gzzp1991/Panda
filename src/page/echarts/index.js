@@ -4,11 +4,7 @@ class Echarts extends PureComponent {
   render() {
     const { children } = this.props;
 
-    return (
-      <div className="echarts">
-        {children}
-      </div>
-    )
+    return <div className="echarts">{children}</div>;
   }
 }
 

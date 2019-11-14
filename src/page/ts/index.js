@@ -1,10 +1,8 @@
 import React from 'react';
 
-class Ts extends React.Component {
+class Ts extends React.PureComponent {
   render() {
-    return (
-      <div className="ts">ts</div>
-    )
+    return <div className="ts">ts</div>;
   }
 }
 

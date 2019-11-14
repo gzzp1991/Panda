@@ -46,7 +46,7 @@ function _arity(n, fn) {
       };
     default:
       throw new Error(
-        'First argument to _arity must be a non-negative integer no greater than ten'
+        'First argument to _arity must be a non-negative integer no greater than ten',
       );
   }
 }
@@ -61,9 +61,8 @@ function _curry1(fn) {
   return function f1(a) {
     if (arguments.length === 0 || _isPlaceholder(a)) {
       return f1;
-    } else {
-      return fn.apply(this, arguments);
     }
+    return fn.apply(this, arguments);
   };
 }
 
@@ -157,12 +156,12 @@ function _curry3(fn) {
  */
 function _curryN(length, received, fn) {
   return function() {
-    var combined = []; // 最终参数暂存(逐步替换占位符参数)
-    var argsIdx = 0; // 当前参数位置标记
-    var left = length; // 占位符数量
-    var combinedIdx = 0; // 最终参数暂存序号
+    const combined = []; // 最终参数暂存(逐步替换占位符参数)
+    let argsIdx = 0; // 当前参数位置标记
+    let left = length; // 占位符数量
+    let combinedIdx = 0; // 最终参数暂存序号
     while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
+      let result;
       // 如果存在最终参数暂存且非占位符
       if (
         combinedIdx < received.length &&
@@ -190,14 +189,14 @@ function _curryN(length, received, fn) {
   };
 }
 
-var curryN = _curry2(function curryN(length, fn) {
+const curryN = _curry2(function curryN(length, fn) {
   if (length === 1) {
     return _curry1(fn);
   }
   return _arity(length, _curryN(length, [], fn));
 });
 
-var curry = _curry1(function curry(fn) {
+const curry = _curry1(function curry(fn) {
   return curryN(fn.length, fn);
 });
 

@@ -9,7 +9,7 @@ class Accessibility extends React.Component {
     this.state = {
       isOpen: false,
     };
-  };
+  }
 
   componentDidMount() {
     console.log('ref ', this.divRef);
@@ -21,9 +21,9 @@ class Accessibility extends React.Component {
   }
 
   onNowClick = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       isOpen: !state.isOpen,
-    }))
+    }));
   };
 
   onWindowClick = evt => {
@@ -36,7 +36,7 @@ class Accessibility extends React.Component {
     ) {
       this.setState({
         isOpen: false,
-      })
+      });
     }
   };
 
@@ -45,7 +45,9 @@ class Accessibility extends React.Component {
 
     return (
       <div className="test-react-accessibility" ref={this.divRef}>
-        <button onClick={this.onClick}>Select an option</button>
+        <button type="button" onClick={this.onClick}>
+          Select an option
+        </button>
         {isOpen && (
           <ul>
             <li>Option 1</li>
@@ -55,7 +57,7 @@ class Accessibility extends React.Component {
           </ul>
         )}
       </div>
-    )
+    );
   }
 }
 

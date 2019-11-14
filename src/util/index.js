@@ -1,6 +1,6 @@
 // 最长不重复字符串
 export function longSub(str) {
-  let len = str.length;
+  const len = str.length;
   if (len === 1 || len === 0) {
     return str;
   }
@@ -24,7 +24,7 @@ export function longSub(str) {
 // 数组扁平化
 export function* iterArr(tree) {
   if (Array.isArray(tree)) {
-    for (let node of tree) {
+    for (const node of tree) {
       yield* iterArr(node);
     }
   } else {
